@@ -17,9 +17,9 @@ public class GameController : MonoBehaviour {
 
     void Update()
     {
-        if (rand.Next(175) == 0)
+        if (rand.Next(300) == 0)
         {
-            InvokeRepeating("createWorm", 5, 0);
+            InvokeRepeating("createWorm", 0, 7);
         }
     }
 
