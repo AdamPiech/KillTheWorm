@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4349c4a24db294d41b1fc646b0b774b6
+timeCreated: 1510227671
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wormButton: {fileID: 114862401235532824, guid: b6bfbfa3507c6e74196f72e5c53b86d7,
+      type: 2}
+  - worm: {fileID: 21300000, guid: 24e8bca693e2a8c449f4475d9d3fc12a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
