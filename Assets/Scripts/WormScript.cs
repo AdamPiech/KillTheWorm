@@ -33,6 +33,11 @@ public class WormScript : MonoBehaviour {
 
     public void createWorm()
     {
+        // kod właściwy
+        GameObject worm = Instantiate(exampleWorm, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        worm.GetComponent<WormLiveCycle>().enableMovement = true;
+        // kod właściwy
+
         wormButton.GetComponent<Image>().sprite = aliveWorm;
         wormButton.interactable = true;
         getCreatedTime();
