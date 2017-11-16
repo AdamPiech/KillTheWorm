@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 
     private System.Random rand = new System.Random();
     public Button[] worms;
+    public GameObject[] wormSpawns;
 
     void Start()
     {
