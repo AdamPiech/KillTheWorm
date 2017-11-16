@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class WormSpawnScript : MonoBehaviour {
+public class WormLiveCycle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
