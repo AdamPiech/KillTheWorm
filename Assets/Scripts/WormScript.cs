@@ -16,7 +16,7 @@ public class WormScript : MonoBehaviour {
     void Start()
     {
         wormButton.GetComponent<Image>().sprite = heap;
-        //wormButton.interactable = false;
+        wormButton.interactable = false;
     }
 
     void Update()
@@ -37,13 +37,13 @@ public class WormScript : MonoBehaviour {
     public void escapeWorm()
     {
         wormButton.GetComponent<Image>().sprite = heap;
-        //wormButton.interactable = false;
+        wormButton.interactable = false;
     }
 
     public void killWorm()
     {
         wormButton.GetComponent<Image>().sprite = deadWorm;
-        //wormButton.interactable = false;
+        wormButton.interactable = false;
     }
 
     private void getCreatedTime()
