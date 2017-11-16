@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
-        //killAllWorms();
+        initAllWorms();
     }
 
     void Update()
@@ -29,11 +29,11 @@ public class GameController : MonoBehaviour {
         worms[rand.Next(16)].GetComponent<WormScript>().createWorm();
     }
 
-    private void killAllWorms()
+    private void initAllWorms()
     {
         for (int index = 0; index < worms.Length; index++)
         {
-            worms[index].GetComponent<WormScript>().killWorm();
+            worms[index].GetComponent<WormScript>().initSpawnPoint(wormSpawns[index]);
         }
     }
 

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4349c4a24db294d41b1fc646b0b774b6
-timeCreated: 1510843586
+timeCreated: 1510855937
 licenseType: Free
 MonoImporter:
   externalObjects: {}
@@ -8,7 +8,9 @@ MonoImporter:
   defaultReferences:
   - wormButton: {fileID: 114862401235532824, guid: b6bfbfa3507c6e74196f72e5c53b86d7,
       type: 2}
-  - worm: {fileID: 21300000, guid: 7e4f2f4b7788e66468a227c33052cf29, type: 3}
+  - exampleWorm: {fileID: 1109583814785256, guid: 0bde79ab9da6f0a4496b8a9bf181e459,
+      type: 2}
+  - aliveWorm: {fileID: 21300000, guid: 7e4f2f4b7788e66468a227c33052cf29, type: 3}
   - deadWorm: {fileID: 21300000, guid: ac5f9392971991a45a1773e1f8d24ba8, type: 3}
   - heap: {fileID: 21300000, guid: e44dd0a3e08de294b83d757b88340e66, type: 3}
   executionOrder: 0

@@ -7,7 +7,11 @@ public class WormScript : MonoBehaviour {
 
     private GameController gameController;
     public Button wormButton;
-    public Sprite worm;
+
+    private GameObject spawnPoint;
+    public GameObject exampleWorm;
+
+    public Sprite aliveWorm;
     public Sprite deadWorm;
     public Sprite heap;
 
@@ -29,7 +33,7 @@ public class WormScript : MonoBehaviour {
 
     public void createWorm()
     {
-        wormButton.GetComponent<Image>().sprite = worm;
+        wormButton.GetComponent<Image>().sprite = aliveWorm;
         wormButton.interactable = true;
         getCreatedTime();
     }
@@ -51,4 +55,8 @@ public class WormScript : MonoBehaviour {
         createWormTime = Time.time;
     }
 
+    public void initSpawnPoint(GameObject spawn)
+    {
+        this.spawnPoint = spawn;
+    }
 }
