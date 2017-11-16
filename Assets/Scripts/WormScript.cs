@@ -8,14 +8,22 @@ public class WormScript : MonoBehaviour {
     private GameController gameController;
     public Button wormButton;
     public Sprite worm;
+    public Sprite deadWorm;
+    public Sprite heap;
 
     private float createWormTime;
+
+    void Start()
+    {
+        wormButton.GetComponent<Image>().sprite = heap;
+        //wormButton.interactable = false;
+    }
 
     void Update()
     {
         if(Time.time - createWormTime > 3)
         {
-            killWorm();
+            escapeWorm();
         }
     }
 
@@ -26,10 +34,16 @@ public class WormScript : MonoBehaviour {
         getCreatedTime();
     }
 
+    public void escapeWorm()
+    {
+        wormButton.GetComponent<Image>().sprite = heap;
+        //wormButton.interactable = false;
+    }
+
     public void killWorm()
     {
-        wormButton.GetComponent<Image>().sprite = null;
-        wormButton.interactable = false;
+        wormButton.GetComponent<Image>().sprite = deadWorm;
+        //wormButton.interactable = false;
     }
 
     private void getCreatedTime()
