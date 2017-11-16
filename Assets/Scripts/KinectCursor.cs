@@ -60,6 +60,8 @@ public class KinectCursor : MonoBehaviour
         if (sim != null && sim.enabled)
         {
             LeftHandPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButton(0)) leftHand.transform.rotation = Quaternion.Euler(0, 0, 45);
+            else leftHand.transform.rotation = Quaternion.Euler(Vector3.zero);
             rightHand.SetActive(false);
         }
         KinectInputModule kim = EventSystem.GetComponent<KinectInputModule>();
@@ -67,9 +69,13 @@ public class KinectCursor : MonoBehaviour
         {
             KinectInputData kid = kim.GetHandData(KinectUIHandType.Left);
             LeftHandPosition = kid.HandPosition;
+            if (kid.IsPressing) leftHand.transform.rotation = Quaternion.Euler(0, 0, 45);
+            else leftHand.transform.rotation = Quaternion.Euler(Vector3.zero);
             rightHand.SetActive(true);
             kid = kim.GetHandData(KinectUIHandType.Right);
             RightHandPosition = kid.HandPosition;
+            if (kid.IsPressing) rightHand.transform.rotation = Quaternion.Euler(0, 0, -45);
+            else rightHand.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
         LeftHandPosition.z = 190;
         RightHandPosition.z = 190;
