@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
-        killAllWorms();
+        //killAllWorms();
     }
 
     void Update()

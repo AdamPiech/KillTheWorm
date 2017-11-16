@@ -42,14 +42,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 24e8bca693e2a8c449f4475d9d3fc12a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3298146b321615d468ffac752385b4e9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -69,7 +69,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wormButton: {fileID: 114862401235532824}
-  worm: {fileID: 21300000, guid: 24e8bca693e2a8c449f4475d9d3fc12a, type: 3}
+  worm: {fileID: 21300000, guid: c6b5c2b2b7908c0488ea62b64d7c38cf, type: 3}
+  deadWorm: {fileID: 21300000, guid: d9cf7860da031eb4289ca7f18f6eaa91, type: 3}
+  heap: {fileID: 21300000, guid: 3298146b321615d468ffac752385b4e9, type: 3}
 --- !u!114 &114862401235532824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,8 +91,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     m_ColorMultiplier: 1

@@ -8,8 +8,15 @@ public class WormScript : MonoBehaviour {
     private GameController gameController;
     public Button wormButton;
     public Sprite worm;
+    public Sprite deadWorm;
+    public Sprite heap;
 
     private float createWormTime;
+
+    void Start()
+    {
+        wormButton.GetComponent<Image>().sprite = heap;
+    }
 
     void Update()
     {
@@ -28,7 +35,7 @@ public class WormScript : MonoBehaviour {
 
     public void killWorm()
     {
-        wormButton.GetComponent<Image>().sprite = null;
+        wormButton.GetComponent<Image>().sprite = deadWorm;
         wormButton.interactable = false;
     }
 
