@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114289820463288136}
   - component: {fileID: 114862401235532824}
   - component: {fileID: 114644332849302310}
+  - component: {fileID: 82159285383906460}
   m_Layer: 5
   m_Name: WormButton
   m_TagString: Untagged
@@ -30,6 +31,86 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!82 &82159285383906460
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735679452394330}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114289820463288136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,6 +155,9 @@ MonoBehaviour:
   aliveWorm: {fileID: 21300000, guid: 7e4f2f4b7788e66468a227c33052cf29, type: 3}
   deadWorm: {fileID: 21300000, guid: ac5f9392971991a45a1773e1f8d24ba8, type: 3}
   heap: {fileID: 21300000, guid: e44dd0a3e08de294b83d757b88340e66, type: 3}
+  AudioKill: {fileID: 8300000, guid: db33c691102002e4d8074c5086f16f85, type: 3}
+  AudioPop: {fileID: 8300000, guid: b3378cf82d56d13478548f5681086b5a, type: 3}
+  AudioHide: {fileID: 8300000, guid: 002a8e22a9e39454b85c2e54f09a0481, type: 3}
 --- !u!114 &114862401235532824
 MonoBehaviour:
   m_ObjectHideFlags: 1

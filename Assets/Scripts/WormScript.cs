@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +18,10 @@ public class WormScript : MonoBehaviour {
     public Sprite deadWorm;
     public Sprite heap;
 
+    public AudioClip AudioKill;
+    public AudioClip AudioPop;
+    public AudioClip AudioHide;
+
     private float createWormTime;
     private float destroyWormTime;
 
@@ -33,7 +37,7 @@ public class WormScript : MonoBehaviour {
 
     void Update()
     {
-        if(Time.time - createWormTime > 3)
+        if(Time.time - createWormTime > 3 && wormButton.interactable)
         {
             escapeWorm();
         }
@@ -58,6 +62,13 @@ public class WormScript : MonoBehaviour {
         this.worm.GetComponent<Image>().sprite = aliveWorm;
         wormButton.interactable = true;
         getCreatedTime();
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        if (!audio.isPlaying)
+        {
+            audio.enabled = true;
+            audio.clip = AudioPop;
+            audio.Play();
+        }
     }
 
     public void escapeWorm()
@@ -65,6 +76,13 @@ public class WormScript : MonoBehaviour {
         wormButton.interactable = false;
         gameController.GetComponent<PointCounter>().removePoints();
         getDestroyTime();
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        if (!audio.isPlaying)
+        {
+            audio.enabled = true;
+            audio.clip = AudioHide;
+            audio.Play();
+        }
     }
 
     public void killWorm()
@@ -73,6 +91,13 @@ public class WormScript : MonoBehaviour {
         wormButton.interactable = false;
         gameController.GetComponent<PointCounter>().addPoints();
         getDestroyTime();
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        if (!audio.isPlaying)
+        {
+            audio.enabled = true;
+            audio.clip = AudioKill;
+            audio.Play();
+        }
     }
 
     private void initWorm()
