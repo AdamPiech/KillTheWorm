@@ -7,80 +7,103 @@ public class KinectCursor : MonoBehaviour
 {
     public Sprite ClubSprite;
     public GameObject EventSystem;
-    private GameObject leftHand;
-    private GameObject rightHand;
+
+    private Vector3 LeftHandPosition;
+    private Vector3 RightHandPosition;
+    private bool LeftHandEnabled;
+    private bool RightHandEnabled;
+    private bool LeftHandPressed;
+    private bool RightHandPressed;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        GameObject leftHand = new GameObject("Left Hand Cursor");
-
-        //Attach a SpriteRenender to the newly created gameobject
-        SpriteRenderer rend = leftHand.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
-
-        //Assign the sprite to the SpriteRenender
-        rend.sprite = ClubSprite;
-
-        leftHand.transform.position = Vector2.zero;
-
-        leftHand.transform.localScale = new Vector3(1f, 1f, 1f);
-
-        leftHand.SetActive(true);
-
-        rend.flipX = true;
-
-        this.leftHand = leftHand;
-
-        GameObject rightHand = new GameObject("Right Hand Cursor");
-
-        //Attach a SpriteRenender to the newly created gameobject
-        SpriteRenderer rend2 = rightHand.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
-
-        //Assign the sprite to the SpriteRenender
-        rend2.sprite = ClubSprite;
-
-        rightHand.transform.position = Vector2.zero;
-
-        rightHand.transform.localScale = new Vector3(1f, 1f, 1f);
-
-        rightHand.SetActive(true);
-
-        this.rightHand = rightHand;
+        LeftHandPosition = Vector3.zero;
+        RightHandPosition = Vector3.zero;
+        LeftHandEnabled = false;
+        RightHandEnabled = false;
+        LeftHandPressed = false;
+        RightHandPressed = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (EventSystem == null)
         {
+            LeftHandEnabled = false;
+            RightHandEnabled = false;
             return;
         }
-        Vector3 LeftHandPosition = Vector3.zero;
-        Vector3 RightHandPosition = Vector3.zero;
+        LeftHandPosition = Vector3.zero;
+        RightHandPosition = Vector3.zero;
         StandaloneInputModule sim = EventSystem.GetComponent<StandaloneInputModule>();
         if (sim != null && sim.enabled)
         {
-            LeftHandPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Input.GetMouseButton(0)) leftHand.transform.rotation = Quaternion.Euler(0, 0, 45);
-            else leftHand.transform.rotation = Quaternion.Euler(Vector3.zero);
-            rightHand.SetActive(false);
+            LeftHandEnabled = false;
+            RightHandPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RightHandPressed = Input.GetMouseButton(0);
+            RightHandEnabled = true;
         }
         KinectInputModule kim = EventSystem.GetComponent<KinectInputModule>();
         if (kim != null && kim.enabled)
         {
             KinectInputData kid = kim.GetHandData(KinectUIHandType.Left);
             LeftHandPosition = kid.HandPosition;
-            if (kid.IsPressing) leftHand.transform.rotation = Quaternion.Euler(0, 0, 45);
-            else leftHand.transform.rotation = Quaternion.Euler(Vector3.zero);
-            rightHand.SetActive(true);
+            LeftHandPressed = kid.IsPressing;
+            LeftHandEnabled = true;
             kid = kim.GetHandData(KinectUIHandType.Right);
             RightHandPosition = kid.HandPosition;
-            if (kid.IsPressing) rightHand.transform.rotation = Quaternion.Euler(0, 0, -45);
-            else rightHand.transform.rotation = Quaternion.Euler(Vector3.zero);
+            RightHandPressed = kid.IsPressing;
+            RightHandEnabled = true;
         }
         LeftHandPosition.z = 190;
         RightHandPosition.z = 190;
-        leftHand.transform.position = LeftHandPosition;
-        rightHand.transform.position = RightHandPosition;
-        //leftHand.transform.position.z = 1;
+    }
+
+    public Vector3 GetCursorPosition(KinectUIHandType hand)
+    {
+        if (hand == KinectUIHandType.Left)
+        {
+            return LeftHandPosition;
+        }
+        else if (hand == KinectUIHandType.Right)
+        {
+            return RightHandPosition;
+        }
+        else
+        {
+            throw new System.Exception("Invalid hand!");
+        }
+    }
+    public bool IsCursorPressed(KinectUIHandType hand)
+    {
+        if (hand == KinectUIHandType.Left)
+        {
+            return LeftHandPressed;
+        }
+        else if (hand == KinectUIHandType.Right)
+        {
+            return RightHandPressed;
+        }
+        else
+        {
+            throw new System.Exception("Invalid hand!");
+        }
+    }
+    public bool IsCursorEnabled(KinectUIHandType hand)
+    {
+        if (hand == KinectUIHandType.Left)
+        {
+            return LeftHandEnabled;
+        }
+        else if (hand == KinectUIHandType.Right)
+        {
+            return RightHandEnabled;
+        }
+        else
+        {
+            throw new System.Exception("Invalid hand!");
+        }
     }
 }
