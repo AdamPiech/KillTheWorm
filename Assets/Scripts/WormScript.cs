@@ -8,6 +8,8 @@ public class WormScript : MonoBehaviour {
     private GameController gameController;
     public Button wormButton;
 
+    private Text totalPointsText;
+
     private GameObject spawnPoint;
     private GameObject worm;
     public GameObject exampleWorm;
@@ -23,6 +25,8 @@ public class WormScript : MonoBehaviour {
 
     void Start()
     {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        totalPointsText = GameObject.Find("TextPoints").GetComponent<Text>();
         wormButton.GetComponent<Image>().sprite = heap;
         wormButton.interactable = false;
     }
@@ -59,6 +63,7 @@ public class WormScript : MonoBehaviour {
     public void escapeWorm()
     {
         wormButton.interactable = false;
+        gameController.GetComponent<PointCounter>().removePoints();
         getDestroyTime();
     }
 
@@ -66,6 +71,7 @@ public class WormScript : MonoBehaviour {
     {
         this.worm.GetComponent<Image>().sprite = deadWorm;
         wormButton.interactable = false;
+        gameController.GetComponent<PointCounter>().addPoints();
         getDestroyTime();
     }
 
