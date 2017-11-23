@@ -9,6 +9,7 @@ public class WormScript : MonoBehaviour {
     public Button wormButton;
 
     private GameObject spawnPoint;
+    private GameObject worm;
     public GameObject exampleWorm;
 
     public Sprite aliveWorm;
@@ -16,6 +17,9 @@ public class WormScript : MonoBehaviour {
     public Sprite heap;
 
     private float createWormTime;
+    private float destroyWormTime;
+
+    private bool wormIsLive = false;
 
     void Start()
     {
@@ -29,35 +33,73 @@ public class WormScript : MonoBehaviour {
         {
             escapeWorm();
         }
+        if (Time.time - createWormTime <= 1 && this.worm != null)
+        {
+            upMovement();
+        }
+        if (Time.time - destroyWormTime <= 1 && this.worm != null && !wormIsLive)
+        {
+            downMovement();
+        }
+        if (Time.time - destroyWormTime > 1 && this.worm != null && !wormIsLive)
+        {
+            Destroy(this.worm);
+            this.worm = null;
+        }
     }
 
     public void createWorm()
     {
-        // kod właściwy
-        GameObject worm = Instantiate(exampleWorm, spawnPoint.transform.position, spawnPoint.transform.rotation);
-        worm.GetComponent<WormLiveCycle>().enableMovement = true;
-        // kod właściwy
-
-        wormButton.GetComponent<Image>().sprite = aliveWorm;
+        initWorm();
+        this.worm.GetComponent<Image>().sprite = aliveWorm;
         wormButton.interactable = true;
         getCreatedTime();
     }
 
     public void escapeWorm()
     {
-        wormButton.GetComponent<Image>().sprite = heap;
         wormButton.interactable = false;
+        getDestroyTime();
     }
 
     public void killWorm()
     {
-        wormButton.GetComponent<Image>().sprite = deadWorm;
+        this.worm.GetComponent<Image>().sprite = deadWorm;
         wormButton.interactable = false;
+        getDestroyTime();
+    }
+
+    private void initWorm()
+    {
+        if (this.worm == null)
+        {
+            this.worm = Instantiate(exampleWorm, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            this.worm.transform.parent = this.spawnPoint.transform.parent;
+            this.worm.transform.localScale = Vector3.one;
+            this.worm.transform.SetSiblingIndex(this.wormButton.transform.GetSiblingIndex() - 5);
+        }
+    }
+
+    private void upMovement()
+    {
+        this.worm.transform.Translate(0, 1.35f * Time.deltaTime, 0);
+    }
+
+    private void downMovement()
+    {
+        this.worm.transform.Translate(0, -1.35f * Time.deltaTime, 0);
     }
 
     private void getCreatedTime()
     {
         createWormTime = Time.time;
+        wormIsLive = true;
+    }
+
+    private void getDestroyTime()
+    {
+        destroyWormTime = Time.time;
+        wormIsLive = false;
     }
 
     public void initSpawnPoint(GameObject spawn)
