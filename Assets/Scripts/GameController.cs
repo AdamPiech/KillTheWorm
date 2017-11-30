@@ -18,6 +18,10 @@ public class GameController : MonoBehaviour {
         IsRunning = false;
         initAllWorms();
     }
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     void Update()
     {
@@ -25,7 +29,7 @@ public class GameController : MonoBehaviour {
         {
             return;
         }
-        if (rand.Next(300) == 0)
+        if (rand.Next(175) == 0)
         {
             InvokeRepeating("createWorm", 0, 7);
         }
