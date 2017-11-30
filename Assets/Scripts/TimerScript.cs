@@ -13,8 +13,7 @@ public class TimerScript : MonoBehaviour {
     public Button restartButton;
     
 	void Start () {
-        restartTimer();
-        gameIsRunning = true;
+
 	}
 	
 	void Update () {
@@ -31,7 +30,8 @@ public class TimerScript : MonoBehaviour {
         {
             timerText.text = "0";
             gameIsRunning = false;
-            restartButton.gameObject.SetActive(!gameIsRunning);
+            gameObject.GetComponent<GameController>().gameOver();
+            Invoke("SetActive", 1);
         }
         else if ((timer - (int)timer) == 0)
         {
@@ -48,6 +48,11 @@ public class TimerScript : MonoBehaviour {
         startTime = Time.time;
         timerText.text = "40";
         gameIsRunning = true;
+        restartButton.gameObject.SetActive(!gameIsRunning);
+    }
+
+    public void SetActive()
+    {
         restartButton.gameObject.SetActive(!gameIsRunning);
     }
 
