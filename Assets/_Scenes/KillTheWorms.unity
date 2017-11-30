@@ -1067,8 +1067,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1137726747}
-        m_MethodName: restartTimer
+      - m_Target: {fileID: 1137726745}
+        m_MethodName: initGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3490,6 +3490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1832852038}
+  gameIsRunning: 0
   restartButton: {fileID: 290512770}
 --- !u!114 &1137726748
 MonoBehaviour:

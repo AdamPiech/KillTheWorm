@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         IsRunning = false;
-        initAllWorms();
     }
 
     void Update()
@@ -57,4 +56,23 @@ public class GameController : MonoBehaviour {
             worms[index].GetComponent<WormScript>().initSpawnPoint(wormSpawns[index]);
         }
     }
+
+    private void desactiveAllWorms()
+    {
+        for (int index = 0; index < worms.Length; index++)
+        {
+            worms[index].GetComponent<WormScript>().wormButton.interactable = false;
+        }
+    }
+
+    public void initGame()
+    {
+        initAllWorms();
+    }
+
+    public void gameOver()
+    {
+        desactiveAllWorms();
+    }
+
 }
