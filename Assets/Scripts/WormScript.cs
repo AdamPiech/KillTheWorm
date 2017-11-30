@@ -77,10 +77,8 @@ public class WormScript : MonoBehaviour {
 
     public void escapeWorm()
     {
-        wormButton.interactable = false;
         gameController.GetComponent<PointCounter>().removePoints();
-        getDestroyTime();
-        wormIsLive = false;
+        DestroyWorm();
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         if (!audio.isPlaying)
         {
@@ -93,10 +91,8 @@ public class WormScript : MonoBehaviour {
     public void killWorm()
     {
         this.worm.GetComponent<Image>().sprite = deadWorm;
-        wormButton.interactable = false;
         gameController.GetComponent<PointCounter>().addPoints();
-        getDestroyTime();
-        wormIsLive = false;
+        DestroyWorm();
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         if (!audio.isPlaying)
         {
@@ -147,5 +143,12 @@ public class WormScript : MonoBehaviour {
     public bool IsHidden()
     {
         return !wormIsVisible;
+    }
+
+    public void DestroyWorm()
+    {
+        wormButton.interactable = false;
+        getDestroyTime();
+        wormIsLive = false;
     }
 }

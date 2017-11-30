@@ -16,10 +16,15 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         IsRunning = false;
+        initAllWorms();
     }
 
     void Update()
     {
+        if (!IsRunning)
+        {
+            return;
+        }
         if (rand.Next(300) == 0)
         {
             InvokeRepeating("createWorm", 0, 7);
@@ -40,15 +45,6 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void endGame()
-    {
-        CancelInvoke();
-        for (int i = 0; i < worms.Length; i++)
-        {
-            worms[i].interactable = false;
-        }
-    }
-
     private void initAllWorms()
     {
         for (int index = 0; index < worms.Length; index++)
@@ -59,19 +55,21 @@ public class GameController : MonoBehaviour {
 
     private void desactiveAllWorms()
     {
-        for (int index = 0; index < worms.Length; index++)
+        for (int i = 0; i < worms.Length; i++)
         {
-            worms[index].GetComponent<WormScript>().wormButton.interactable = false;
+            worms[i].GetComponent<WormScript>().DestroyWorm();
         }
     }
 
     public void initGame()
     {
-        initAllWorms();
+        IsRunning = true;
     }
 
     public void gameOver()
     {
+        IsRunning = false;
+        CancelInvoke();
         desactiveAllWorms();
     }
 
