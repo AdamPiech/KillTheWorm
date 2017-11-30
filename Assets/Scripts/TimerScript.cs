@@ -9,46 +9,46 @@ public class TimerScript : MonoBehaviour {
     public Text timerText;
     private double startTime;
     private double timer;
-    bool start;
+    public bool gameIsRunning;
     public Button restartButton;
-
-	// Use this for initialization
+    
 	void Start () {
         restartTimer();
-        start = true;
+        gameIsRunning = true;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        getTime();
+        if (gameIsRunning)
+        {
+            getTime();
+        }
 	}
 
     void getTime()
     {
-        if (start)
+         timer = Math.Round(40 - (Time.time - startTime), 1);
+        if (timer <= 0)
         {
-            timer = Math.Round(40 - (Time.time - startTime), 1);
-            if (timer <= 0)
-            {
-                timerText.text = "0";
-                start = false;
-                restartButton.gameObject.SetActive(true);
-            }
-            else if((timer - (int) timer) == 0)
-            {
-                timerText.text = timer.ToString() + ".0";
-            }
-            else
-                timerText.text = timer.ToString();
+            timerText.text = "0";
+            gameIsRunning = false;
+            restartButton.gameObject.SetActive(!gameIsRunning);
+        }
+        else if ((timer - (int)timer) == 0)
+        {
+            timerText.text = timer.ToString() + ".0";
+        }
+        else
+        {
+            timerText.text = timer.ToString();
         }
     }
 
     public void restartTimer()
     {
-        timerText.text = "40";
         startTime = Time.time;
-        restartButton.gameObject.SetActive(false);
-        start = true;
+        timerText.text = "40";
+        gameIsRunning = true;
+        restartButton.gameObject.SetActive(!gameIsRunning);
     }
 
 }
