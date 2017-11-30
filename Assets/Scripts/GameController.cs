@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,11 @@ public class GameController : MonoBehaviour {
     private System.Random rand = new System.Random();
     public Button[] worms;
     public GameObject[] wormSpawns;
+    private bool IsRunning;
 
     void Start()
     {
+        IsRunning = false;
         initAllWorms();
     }
 
@@ -26,7 +29,25 @@ public class GameController : MonoBehaviour {
 
     void createWorm()
     {
-        worms[rand.Next(16)].GetComponent<WormScript>().createWorm();
+        List<int> availableButtons = new List<int>();
+        for (int i = 0; i < worms.Length; i++)
+        {
+            if (worms[i].GetComponent<WormScript>().IsHidden()) availableButtons.Add(i);
+        }
+        if (availableButtons.Count > 0)
+        {
+            availableButtons = availableButtons.OrderBy(a => rand.Next(1024)).ToList<int>();
+            worms[availableButtons[0]].GetComponent<WormScript>().createWorm();
+        }
+    }
+
+    public void endGame()
+    {
+        CancelInvoke();
+        for (int i = 0; i < worms.Length; i++)
+        {
+            worms[i].interactable = false;
+        }
     }
 
     private void initAllWorms()
@@ -36,5 +57,4 @@ public class GameController : MonoBehaviour {
             worms[index].GetComponent<WormScript>().initSpawnPoint(wormSpawns[index]);
         }
     }
-
 }

@@ -26,6 +26,7 @@ public class WormScript : MonoBehaviour {
     private float destroyWormTime;
 
     private bool wormIsLive = false;
+    private bool wormIsVisible = false;
 
     void Start()
     {
@@ -37,22 +38,23 @@ public class WormScript : MonoBehaviour {
 
     void Update()
     {
-        if(Time.time - createWormTime > 3 && wormButton.interactable)
+        if(Time.time - createWormTime > 3 && wormIsLive)
         {
             escapeWorm();
         }
-        if (Time.time - createWormTime <= 1 && this.worm != null)
+        if (Time.time - createWormTime <= 1 && wormIsLive)
         {
             upMovement();
         }
-        if (Time.time - destroyWormTime <= 1 && this.worm != null && !wormIsLive)
+        if (Time.time - destroyWormTime <= 1 && wormIsVisible && !wormIsLive)
         {
             downMovement();
         }
-        if (Time.time - destroyWormTime > 1 && this.worm != null && !wormIsLive)
+        if (Time.time - destroyWormTime > 1 && wormIsVisible && !wormIsLive)
         {
             Destroy(this.worm);
             this.worm = null;
+            wormIsVisible = false;
         }
     }
 
@@ -62,6 +64,8 @@ public class WormScript : MonoBehaviour {
         this.worm.GetComponent<Image>().sprite = aliveWorm;
         wormButton.interactable = true;
         getCreatedTime();
+        wormIsVisible = true;
+        wormIsLive = true;
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         if (!audio.isPlaying)
         {
@@ -76,6 +80,7 @@ public class WormScript : MonoBehaviour {
         wormButton.interactable = false;
         gameController.GetComponent<PointCounter>().removePoints();
         getDestroyTime();
+        wormIsLive = false;
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         if (!audio.isPlaying)
         {
@@ -91,6 +96,7 @@ public class WormScript : MonoBehaviour {
         wormButton.interactable = false;
         gameController.GetComponent<PointCounter>().addPoints();
         getDestroyTime();
+        wormIsLive = false;
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         if (!audio.isPlaying)
         {
@@ -136,5 +142,10 @@ public class WormScript : MonoBehaviour {
     public void initSpawnPoint(GameObject spawn)
     {
         this.spawnPoint = spawn;
+    }
+
+    public bool IsHidden()
+    {
+        return !wormIsVisible;
     }
 }
